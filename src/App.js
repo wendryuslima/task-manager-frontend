@@ -1,8 +1,8 @@
 import axios from "axios";
-import "./App-style.js";
+import "./components/App.style.js";
 import { useEffect } from "react";
 import { useState } from "react";
-import { HeaderContainer } from "./App-style.js";
+
 
 const App = () => {
   const [tasks, setTasks] = useState([
@@ -32,11 +32,9 @@ const App = () => {
   }, []);
   return (
     <>
-      <HeaderContainer>
-        {tasks.map((task) => (
-          <p>{task.description}</p>
-        ))}
-      </HeaderContainer>
+      {tasks.map((task) => (
+        <p>{task.description}</p>
+      ))}
     </>
   );
 };
