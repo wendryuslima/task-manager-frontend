@@ -2,15 +2,11 @@
   padding: 60px 85px;
   display: flex;
   flex-direction: column;
-  max-width: 40%;
+  max-width: 50%;
   padding-top: 50px;
   height: 100vh;
   overflow-y: hidden;
   flex: auto;
-
-  @media (max-width: 1024px) {
-    max-width: 60%;
-  }
 
   @media (max-width: 768px) {
     padding: 30px;

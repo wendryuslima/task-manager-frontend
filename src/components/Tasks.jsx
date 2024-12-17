@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useState, useEffect } from "react";
 import TaskItem from "./TaskItem";
-import CustomInput from "./CustomInput";
+
 import AddTask from "./AddTask";
 
 const Tasks = () => {
