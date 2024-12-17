@@ -6,7 +6,7 @@ import "./styles/AddTask.scss";
 import CustomButton from "./CustomButton";
 import axios from "axios";
 
-const AddTask = () => {
+const AddTask = ({ fetchTasks }) => {
   const [task, setTask] = useState("");
 
   const onChange = (e) => {
@@ -15,32 +15,17 @@ const AddTask = () => {
 
   const handleTaskAddition = async () => {
     try {
-      console.log("Iniciando requisição para adicionar tarefa...");
-
       const payload = {
         description: task,
         isCompleted: false,
       };
-      console.log("Payload enviado:", payload);
 
       const response = await axios.post("http://localhost:8000/tasks", payload);
       console.log("Resposta do servidor:", response.data);
+      await fetchTasks();
+      setTask("");
     } catch (error) {
       console.log("Erro ao tentar adicionar tarefa:");
-      if (error.response) {
-        // O servidor respondeu com um código de status fora da faixa 2xx
-        console.error("Resposta do servidor:", error.response.data);
-        console.error("Código de status:", error.response.status);
-      } else if (error.request) {
-        // A requisição foi feita, mas nenhuma resposta foi recebida
-        console.error(
-          "Nenhuma resposta recebida. Detalhes da requisição:",
-          error.request
-        );
-      } else {
-        // Outro tipo de erro ocorreu
-        console.error("Erro na configuração da requisição:", error.message);
-      }
     }
   };
 
