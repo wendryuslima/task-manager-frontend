@@ -12,7 +12,7 @@ const Tasks = () => {
       const { data } = await axios.get(`http://localhost:8000/tasks`);
 
       setTasks(data);
-    } catch (_error) {}
+    } catch (error) {}
   }, []);
 
   const lastTasks = useMemo(() => {
