@@ -1,10 +1,3 @@
-import {
-  CompletedTasks,
-  LastTasks,
-  TaskContainer,
-  TaskList,
-  TitleLastTasks,
-} from "./styles/Task.style";
 import axios from "axios";
 import { useState, useEffect } from "react";
 import TaskItem from "./TaskItem";
@@ -35,31 +28,36 @@ const Tasks = () => {
     fetchTasks();
   }, []);
   return (
-    <TaskContainer>
-      <TitleLastTasks>Minhas tarefas</TitleLastTasks>
+    <div className="tasks-container">
+      <h2>Minhas Tarefas</h2>
 
-      <LastTasks>
-        <TitleLastTasks>Ultimas tarefas</TitleLastTasks>
-        <TaskList>
-          {tasks
-            .filter((task) => task.isCompleted === false)
-            .map((lastTask) => (
-              <TaskItem task={lastTask} />
-            ))}
-        </TaskList>
-      </LastTasks>
+      <div className="last-tasks">
+        <h3>Últimas Tarefas</h3>
 
-      <CompletedTasks>
-        <TitleLastTasks>Tarefas tarefas</TitleLastTasks>
-        <TaskList>
-          {tasks
-            .filter((task) => task.description)
-            .map((completedTask) => (
-              <TaskItem task={completedTask} />
-            ))}
-        </TaskList>
-      </CompletedTasks>
-    </TaskContainer>
+        <div className="tasks-list">
+          {tasks.map((lastTask) => (
+            <TaskItem
+              key={lastTask.id}
+              task={lastTask}
+              fetchTasks={fetchTasks}
+            />
+          ))}
+        </div>
+      </div>
+
+      <div className="completed-tasks">
+        <h3>Tarefas Concluídas</h3>
+        <div className="tasks-list">
+          {tasks.map((completedTask) => (
+            <TaskItem
+              key={completedTask.id}
+              task={completedTask}
+              fetchTasks={fetchTasks}
+            />
+          ))}
+        </div>
+      </div>
+    </div>
   );
 };
 
