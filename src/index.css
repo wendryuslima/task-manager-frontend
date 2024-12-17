@@ -14,4 +14,5 @@ body {
   font-family: "Archivo", sans-serif;
   background: linear-gradient(259.93deg, #000000 -41.68%, #00171f 146.85%);
   color: #ffff;
+  overflow: hidden;
 }
