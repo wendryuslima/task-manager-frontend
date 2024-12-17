@@ -1,6 +1,7 @@
 import axios from "axios";
 import { useState, useEffect } from "react";
 import TaskItem from "./TaskItem";
+import CustomInput from "./CustomInput";
 
 const Tasks = () => {
   const [tasks, setTasks] = useState([
@@ -30,6 +31,7 @@ const Tasks = () => {
   return (
     <div className="tasks-container">
       <h2>Minhas Tarefas</h2>
+      <CustomInput />
 
       <div className="last-tasks">
         <h3>Últimas Tarefas</h3>

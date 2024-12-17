@@ -1,4 +1,4 @@
-import "./components/App.style.js";
+import "./components/styles/App.scss";
 
 import Tasks from "./components/Tasks.jsx";
 
