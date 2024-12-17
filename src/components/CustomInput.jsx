@@ -6,7 +6,9 @@ const CustomInput = ({ label, value }) => {
       <input type="text" className="custom-input" />
       {label ? (
         <label
-          className={`${value.lenght > 0 ? "shrink" : ""} custom-input-label`}
+          className={`${
+            value.lenght !== "" ? "shrink" : ""
+          } custom-input-label`}
         ></label>
       ) : null}
     </div>
