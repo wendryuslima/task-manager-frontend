@@ -1,30 +1,23 @@
 import axios from "axios";
-import { useState, useEffect, useMemo } from "react";
+import { useState, useEffect, useMemo, useCallback } from "react";
 import TaskItem from "./TaskItem";
 
 import AddTask from "./AddTask";
 
 const Tasks = () => {
-  const [tasks, setTasks] = useState([
-    {
-      id: "1",
-      description: "Estudar clean code",
-      isCompleted: true,
-    },
-    {
-      id: "2",
-      description: "Ler",
-      isCompleted: false,
-    },
-  ]);
-  const fetchTasks = async () => {
+  const [tasks, setTasks] = useState([]);
+
+  const fetchTasks = useCallback(async () => {
     try {
-      const { data } = await axios.get("http://localhost:8000/tasks");
+      const { data } = await axios.get(`http://localhost:8000/tasks`);
+
       setTasks(data);
-    } catch (error) {
-      console.log(error);
-    }
-  };
+    } catch (_error) {}
+  }, []);
+
+  const lastTasks = useMemo(() => {
+    return tasks.filter((task) => task.isCompleted === false);
+  }, [tasks]);
 
   const completedTasks = useMemo(() => {
     return tasks.filter((task) => task.isCompleted === true);
@@ -32,7 +25,8 @@ const Tasks = () => {
 
   useEffect(() => {
     fetchTasks();
-  }, []);
+  }, [fetchTasks]);
+
   return (
     <div className="tasks-container">
       <h2>Minhas Tarefas</h2>
@@ -40,11 +34,10 @@ const Tasks = () => {
       <div className="last-tasks">
         <h3>Últimas Tarefas</h3>
         <AddTask fetchTasks={fetchTasks} />
-
         <div className="tasks-list">
-          {tasks.map((lastTask) => (
+          {lastTasks.map((lastTask) => (
             <TaskItem
-              key={lastTask.id}
+              key={lastTask._id}
               task={lastTask}
               fetchTasks={fetchTasks}
             />

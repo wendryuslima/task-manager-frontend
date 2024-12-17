@@ -4,7 +4,7 @@
   flex-direction: column;
   max-width: 60%;
   padding-top: 50px;
-
+  height: 100vh;
   overflow-y: hidden;
   flex: auto;
 
@@ -54,7 +54,7 @@
     .tasks-list {
       overflow-y: auto;
       margin-top: 28px;
-      height: 400px;
+   
     }
   }
 

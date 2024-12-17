@@ -4,13 +4,22 @@ import "./styles/Task.scss";
 import axios from "axios";
 
 const TaskItem = ({ task, fetchTasks }) => {
-  const handleDeleteCLick = async () => {
+  const handleDeleteCLick = async (e) => {
     try {
       await axios.delete(`http://localhost:8000/tasks/${task._id}`);
-      fetchTasks();
+      await fetchTasks();
     } catch (error) {
       console.log(error);
     }
+  };
+
+  const handleCompletionTask = async (e) => {
+    try {
+      await axios.patch(`http://localhost:8000/tasks/${task._id}`, {
+        isCompleted: e.target.checked,
+      });
+      await fetchTasks();
+    } catch (error) {}
   };
   return (
     <>
@@ -24,7 +33,11 @@ const TaskItem = ({ task, fetchTasks }) => {
             }
           >
             {task.description}
-            <input type="checkbox" defaultChecked={task.isCompleted}></input>
+            <input
+              type="checkbox"
+              defaultChecked={task.isCompleted}
+              onChange={(e) => handleCompletionTask(e)}
+            />
             <span
               className={task.isCompleted ? "checkmark completed" : "checkmark"}
             ></span>
