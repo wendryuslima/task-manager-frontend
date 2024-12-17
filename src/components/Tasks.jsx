@@ -12,17 +12,25 @@ const Tasks = () => {
       const { data } = await axios.get(
         `${process.env.REACT_APP_API_URL}/tasks`
       );
-
+      console.log("Data recebida:", data); 
       setTasks(data);
-    } catch (error) {}
+    } catch (error) {
+      console.error("Erro ao buscar tarefas:", error);
+    }
   }, []);
 
   const lastTasks = useMemo(() => {
-    return tasks.filter((task) => task.isCompleted === false);
+    if (Array.isArray(tasks)) {
+      return tasks.filter((task) => task.isCompleted === false);
+    }
+    return [];
   }, [tasks]);
 
   const completedTasks = useMemo(() => {
-    return tasks.filter((task) => task.isCompleted === true);
+    if (Array.isArray(tasks)) {
+      return tasks.filter((task) => task.isCompleted === true);
+    }
+    return [];
   }, [tasks]);
 
   useEffect(() => {
