@@ -6,7 +6,7 @@ import axios from "axios";
 const TaskItem = ({ task, fetchTasks }) => {
   const handleDeleteCLick = async (e) => {
     try {
-      await axios.delete(`http://localhost:8000/tasks/${task._id}`);
+      await axios.delete(`${process.env.REACT_APP_API_URL}/tasks/${task._id}`);
       await fetchTasks();
     } catch (error) {
       console.log(error);
@@ -15,7 +15,7 @@ const TaskItem = ({ task, fetchTasks }) => {
 
   const handleCompletionTask = async (e) => {
     try {
-      await axios.patch(`http://localhost:8000/tasks/${task._id}`, {
+      await axios.patch(`${process.env.REACT_APP_API_URL}/tasks/${task._id}`, {
         isCompleted: e.target.checked,
       });
       await fetchTasks();

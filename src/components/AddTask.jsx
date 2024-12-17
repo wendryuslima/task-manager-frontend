@@ -20,7 +20,10 @@ const AddTask = ({ fetchTasks }) => {
         isCompleted: false,
       };
 
-      const response = await axios.post("http://localhost:8000/tasks", payload);
+      const response = await axios.post(
+        `${process.env.REACT_APP_API_URL}/tasks`,
+        payload
+      );
       console.log("Resposta do servidor:", response.data);
       await fetchTasks();
       setTask("");
